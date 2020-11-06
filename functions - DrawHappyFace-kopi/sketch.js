@@ -6,16 +6,17 @@ function setup() {
 function draw() { 
 	background(131, 175, 155);
    
-   drawHappyFace(300,100);
-   drawHappyFace(410,100);
+   randomSeed(0);
+   for (var i = 35; i < width + 40; i += 40) {
+     var scalar = random(0.25, 1.0);
+     drawHappyFace(i, 100, scalar);
+   }
 }
 
-function drawHappyFace(x,y){
+function drawHappyFace(x,y,s){
    push();
-   //Her kommer i selv til at skrive kode
-   
-   translate(x, y);
-
+    translate(x, y);
+   scale(s)
    //Face
    fill(249,205,173);//rosy beige
    ellipse(0, 0, 100, 100);

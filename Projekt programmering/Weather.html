@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC >
+<html>
+
+  
+    <link rel="stylesheet" href="weather.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>Vejr app der er opbygget rundt om et api</title>
+    <script type="text/javascript">
+
+    //I denne funktion kalder vi på apiet og indsætter byen som noget der varierer
+    // og opdatere text og billeder i fohold til dataen vi får ud af apiet
+      async function getWeather(city) {
+        const api_url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=f3e1dbb6e7a46031602ef260a90ba3d9';
+        
+        //Her henter apiet data
+        const response = await fetch(api_url);
+        const data = await response.json();
+       
+        //ændre texten som kommer frem i informations boksen
+        document.getElementById('town').textContent = city + " Temperaturen er nu: " + data.main.temp;
+
+        //Får det rigtige billed til at komme frem
+        if (data.main.temp < 0) {
+          if (data.clouds.all < 40){document.getElementById("img").src="koldt-ingen-sky.jpg"} else {document.getElementById("img").src="koldt-sky.jpg"} }
+        else { if (data.clouds.all < 40){document.getElementById("img").src="varmt-ingen-sky.jpg"} else {document.getElementById("img").src="varmt-sky.jpg"}}
+
+      }
+//giver os informationen om københavn før man vælger en by
+      getWeather("Copenhagen,dk")
+
+      
+
+    </script>
+  </head>
+
+  <body class="baggrund">
+      <!--Her er drop down boxen hvor man kan vælge byer-->
+    <div class="box">
+      <button class=box2><p id = "town"></p></button>
+   
+        <div>
+        <select name="aa" onchange="getWeather(this.value)">
+          <option value="">Please select</option>
+          <option value="Copenhagen,dk">Copenhagen</option>
+          <option value="Toronto,ca">Toronto</option>
+          <option value="Alaska,us">Alaska</option>
+          <option value="Sidney,au">Sidney</option>
+          <option value="Reykjavik,is">Reykjavik</option>
+          <option value="Okinawa,jp">Okinawa</option>
+        </select>
+      </div>
+    </div>
+    <div>
+        <!--difinere billedet og størelsen på billederne-->
+      <IMG SRC="varmt-sky.jpg" id = 'img'  width="400" height="600" >
+    </div>
+  </body>
+
+</html>

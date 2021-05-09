@@ -1,0 +1,5 @@
+<?php
+file = file_get_contents("http://vejr.eu/api.php?location=Copenhagen&degree=C");
+data = json_decode($file);
+print_r(data);
+?>

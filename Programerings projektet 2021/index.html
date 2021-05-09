@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="en"><head>
+    <script src="p5.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+
+    <script>
+      if('geolocation' in navigator){
+        console.log('geolocation available');
+        navigator.geolocation.getCurrentPosition((position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          document.getElementById('latitude').textContent= lat;
+          document.getElementById('longitude').textContent= lon;
+          //console.log(position);
+          
+});
+      }else{
+        console.log('geolocation not available');
+      }
+
+ </script>
+  </head>
+  <body>
+    <script src="sketch.js"></script>
+
+<p>latitude: <span id="latitude">&deg;</span><br/>
+  longitude: <span id="longitude">&deg;</span>
+
+</p>
+</body>
+</html>
